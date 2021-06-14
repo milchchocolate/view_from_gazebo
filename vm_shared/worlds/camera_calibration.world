@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+    <world name="camera_calibration">
+        <include>
+            <uri>model://ground_plane</uri>
+        </include>
+        <include>
+            <uri>model://sun</uri>
+        </include>
+        <include>
+            <uri>model://chekerboard_pattern</uri>
+            <pose>-5 0 0 0 0 0</pose>
+        </include>
+        <include>
+            <uri>model://camera</uri>
+            <pose>0 0 1 0 0 3.14</pose>
+        </include>
+    </world>
+</sdf>

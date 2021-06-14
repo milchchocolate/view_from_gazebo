@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<sdf version="1.5">
+    <model name="chekerboard_pattern">
+    <static>true</static>
+        <link name="link">
+        <visual name="visual">
+            <pose>-0.05 0 1 0 0 1.570796</pose>
+            <geometry>
+            <mesh>
+                <uri>model://chekerboard_pattern/meshes/calibration_pattern_8x8_2m.dae</uri>
+            </mesh>
+            </geometry>
+        </visual>
+        </link>
+    </model>
+</sdf>
