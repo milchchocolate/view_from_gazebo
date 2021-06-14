@@ -6,8 +6,8 @@
 
 
 ```bash
-git clone <>
-cd <>
+git clone https://github.com/milchchocolate/view_from_gazebo.git
+cd view_from_gazebo
 ./run-gazebo.sh
 ```
 
@@ -19,6 +19,8 @@ cd <>
 (container) cmake --build . -j 4 --target install --config Release
 (container) gazebo -u camera_calibration_move_model.world --verbose
 ```
+
+Simulator starts in <u>paused</u> state. Click play button to start simulation.
 
 # Development in container with VS Code
 
@@ -46,5 +48,5 @@ Add `"/usr/include/**"` to include path for intellisense.
 ```
 
 ## CMake
-CMake Version used in project is 3.15. [see features](https://cliutils.gitlab.io/modern-cmake/chapters/intro/newcmake.html).
+CMake Version used in project is 3.15. [see features](https://cliutils.gitlab.io/modern-cmake/chapters/intro/newcmake.html).<br>
 Ref: [An Introduction to Modern CMake](https://cliutils.gitlab.io/modern-cmake/)
