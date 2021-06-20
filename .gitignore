@@ -115,7 +115,9 @@ CMakeUserPresets.json
 
 ### VisualStudioCode ###
 .vscode/*
-# !.vscode/settings.json
+!src/.vscode/c_cpp_properties.json
+!src/.vscode/compile_commands.json
+!src/.vscode/settings.json
 # !.vscode/tasks.json
 # !.vscode/launch.json
 # !.vscode/extensions.json

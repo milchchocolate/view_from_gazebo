@@ -18,20 +18,31 @@ RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/nul
     && apt-add-repository 'deb https://apt.kitware.com/ubuntu/ focal main' \
     && apt-get install --yes kitware-archive-keyring \
     && rm /etc/apt/trusted.gpg.d/kitware.gpg \
-    && apt-get install --yes cmake
+    && apt-get install --yes \
+    cmake \
+    cmake-curses-gui \
+    cmake-qt-gui
 
-# clang
+# clang / llvm
 RUN bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+RUN apt-get install --yes \
+    clang-format \
+    clang-tidy \
+    iwyu
 
 # packages
-RUN apt-get install --yes \
+RUN apt-get update \
+    && apt-get install --yes \
+    auto-complete-el \
     bash-completion \
     build-essential \
+    cppcheck \
     git \
     libboost-dev \
     libceres-dev \
     libeigen3-dev \
     libopencv-dev \
+    locate \
     tree
 
 # cleanup
