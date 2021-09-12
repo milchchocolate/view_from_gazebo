@@ -45,6 +45,13 @@ RUN apt-get update \
     locate \
     tree
 
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt update \
+    && apt install --yes \
+    xserver-xorg-video-intel xserver-xorg-core \
+    mesa-utils libgl1-mesa-glx
+
 # cleanup
 RUN apt autoremove --yes \
     && apt autoclean --yes
