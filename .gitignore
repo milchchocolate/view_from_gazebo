@@ -121,10 +121,10 @@ CMakeUserPresets.json
 # !.vscode/tasks.json
 # !.vscode/launch.json
 # !.vscode/extensions.json
-!src/.vscode/c_cpp_properties.json
-!src/.vscode/compile_commands.json
-!src/.vscode/settings.json
-!src/.vscode/extensions.json
+!vm_shared/src/.vscode/c_cpp_properties.json
+; !vm_shared/src/.vscode/compile_commands.json
+!vm_shared/src/.vscode/settings.json
+!vm_shared/src/.vscode/extensions.json
 *.code-workspace
 
 ### VisualStudioCode Patch ###
