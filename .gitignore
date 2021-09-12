@@ -122,7 +122,7 @@ CMakeUserPresets.json
 # !.vscode/launch.json
 # !.vscode/extensions.json
 !vm_shared/src/.vscode/c_cpp_properties.json
-; !vm_shared/src/.vscode/compile_commands.json
+# !vm_shared/src/.vscode/compile_commands.json
 !vm_shared/src/.vscode/settings.json
 !vm_shared/src/.vscode/extensions.json
 *.code-workspace
