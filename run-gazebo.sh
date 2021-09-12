@@ -15,7 +15,7 @@ docker build             \
 docker run                    \
     --rm                      \
     --net="host"              \
-    -e DISPLAY                \
+    -e DISPLAY=unix$DISPLAY   \
     -it                       \
     --name "gazebo-vm"        \
     --entrypoint "/bin/bash"  \
@@ -25,6 +25,7 @@ docker run                    \
     --volume "${PWD}/vm_shared/plugins":"/root/plugins"  \
     --volume "${PWD}/vm_shared/src":"/root/src"          \
     --volume "${PWD}/vm_shared/.vscode":"/root/.vscode"  \
+    --volume "/tmp/.X11-unix":"/tmp/.X11-unix:rw"        \
     gazebo-vm
 
 xhost -local:root
