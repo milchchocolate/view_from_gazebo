@@ -106,6 +106,9 @@ if ! shopt -oq posix; then
  fi
 fi
 
+# graphics
+# export LIBGL_DRI3_DISABLE=1
+
 # Gazebo environment variables
 source /usr/share/gazebo/setup.sh
 export GAZEBO_RESOURCE_PATH=/root/worlds:$GAZEBO_RESOURCE_PATH

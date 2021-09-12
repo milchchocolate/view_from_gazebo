@@ -56,7 +56,7 @@ RUN apt-get update \
 RUN apt update \
     && apt install --yes \
     xserver-xorg-video-intel xserver-xorg-core \
-    mesa-utils libgl1-mesa-glx
+    mesa-utils libgl1-mesa-glx libgl1-mesa-dri
 
 # cleanup
 RUN apt autoremove --yes \
