@@ -115,12 +115,16 @@ CMakeUserPresets.json
 
 ### VisualStudioCode ###
 .vscode/*
-!src/.vscode/c_cpp_properties.json
-!src/.vscode/compile_commands.json
-!src/.vscode/settings.json
+# !.vscode/c_cpp_properties.json
+# !.vscode/compile_commands.json
+# !.vscode/settings.json
 # !.vscode/tasks.json
 # !.vscode/launch.json
 # !.vscode/extensions.json
+!src/.vscode/c_cpp_properties.json
+!src/.vscode/compile_commands.json
+!src/.vscode/settings.json
+!src/.vscode/extensions.json
 *.code-workspace
 
 ### VisualStudioCode Patch ###
@@ -131,6 +135,7 @@ CMakeUserPresets.json
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,c,c++,cmake
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
+vm_shared/.bash_history
 vm_shared/.gazebo/*
 vm_shared/plugins/*
 vm_shared/src/build

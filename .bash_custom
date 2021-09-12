@@ -106,8 +106,12 @@ if ! shopt -oq posix; then
  fi
 fi
 
+if [[ -e /usr/lib/git-core/git-sh-prompt ]]; then
+    . /usr/lib/git-core/git-sh-prompt
+fi
+
 # graphics
-# export LIBGL_DRI3_DISABLE=1
+# export LIBGL_DRI3_DISABLE=1 # uncomment to supress some of libGL errors
 
 # Gazebo environment variables
 source /usr/share/gazebo/setup.sh

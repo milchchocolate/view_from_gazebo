@@ -1,7 +1,8 @@
 FROM gazebo:libgazebo11-focal
-# FROM gazebo:libgazebo9-bionic
-# FROM nvidia/driver:460.73.01-ubuntu20.04
-# FROM nvidia/cuda:11.3.1-devel-ubuntu20.04
+
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Berlin
 
 # essentials
 RUN apt-get update \
@@ -22,7 +23,9 @@ RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/nul
     && apt-get install --yes \
     cmake \
     cmake-curses-gui \
-    cmake-qt-gui
+    cmake-qt-gui \
+    make \
+    ninja-build
 
 # clang / llvm
 RUN bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
@@ -31,7 +34,7 @@ RUN apt-get install --yes \
     clang-tidy \
     iwyu
 
-# packages
+# common packages
 RUN apt-get update \
     && apt-get install --yes \
     auto-complete-el \
@@ -46,8 +49,6 @@ RUN apt-get update \
     locate \
     tree
 
-ENV DEBIAN_FRONTEND noninteractive
-
 RUN apt-get update \
     && apt-get install --yes \
     iputils-ping
@@ -55,8 +56,11 @@ RUN apt-get update \
 # graphics
 RUN apt update \
     && apt install --yes \
-    xserver-xorg-video-intel xserver-xorg-core \
+    xserver-xorg xserver-xorg-video-intel xserver-xorg-core \
     mesa-utils libgl1-mesa-glx libgl1-mesa-dri
+
+RUN apt update && apt install --yes python3-pip \
+    && pip3 install cpplint
 
 # cleanup
 RUN apt autoremove --yes \
