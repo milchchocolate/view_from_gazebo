@@ -34,18 +34,14 @@ Ref: [VS Code: Remote development in Containers](https://code.visualstudio.com/d
   - click `Attach to a running container...`
   - select `gazebo-vm`
 
-- Install extension: [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)
+- Install extensions:
+  - [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools)
 
-- Install C/C++ extension: [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
+  - [CppTools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools)
 
-When working on a C/C++ file, a config file `.vscode/c_cpp_properties.json` will be generated.<br>
-Add `"/usr/include/**"` to include path for intellisense.
-```
- "includePath": [
-                "${workspaceFolder}/**",
-                "/usr/include/**"
-            ],
-```
+  - [Clang-Format](https://marketplace.visualstudio.com/items?itemName=xaver.clang-format)
+
+  - [Clang-Tidy](https://marketplace.visualstudio.com/items?itemName=notskm.clang-tidy)
 
 ## CMake
 CMake Version used in project is 3.15. [see features](https://cliutils.gitlab.io/modern-cmake/chapters/intro/newcmake.html).<br>

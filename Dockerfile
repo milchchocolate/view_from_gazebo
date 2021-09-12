@@ -1,7 +1,8 @@
 FROM gazebo:libgazebo11-focal
-# FROM gazebo:libgazebo9-bionic
-# FROM nvidia/driver:460.73.01-ubuntu20.04
-# FROM nvidia/cuda:11.3.1-devel-ubuntu20.04
+
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Europe/Berlin
 
 # essentials
 RUN apt-get update \
@@ -10,29 +11,56 @@ RUN apt-get update \
     ca-certificates \
     apt-transport-https \
     apt-utils \
-    gnupg software-properties-common \
+    gpg gnupg software-properties-common \
     wget curl
 
 # cmake
-RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null \
-    && apt-add-repository 'deb https://apt.kitware.com/ubuntu/ focal main' \
+RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null \
+    && echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ focal main' | tee /etc/apt/sources.list.d/kitware.list >/dev/null \
+    && apt-get update \
+    && rm /usr/share/keyrings/kitware-archive-keyring.gpg \
     && apt-get install --yes kitware-archive-keyring \
-    && rm /etc/apt/trusted.gpg.d/kitware.gpg \
-    && apt-get install --yes cmake
+    && apt-get install --yes \
+    cmake \
+    cmake-curses-gui \
+    cmake-qt-gui \
+    make \
+    ninja-build
 
-# clang
+# clang / llvm
 RUN bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
-
-# packages
 RUN apt-get install --yes \
+    clang-format \
+    clang-tidy \
+    iwyu
+
+# common packages
+RUN apt-get update \
+    && apt-get install --yes \
+    auto-complete-el \
     bash-completion \
     build-essential \
+    cppcheck \
     git \
     libboost-dev \
     libceres-dev \
     libeigen3-dev \
     libopencv-dev \
+    locate \
     tree
+
+RUN apt-get update \
+    && apt-get install --yes \
+    iputils-ping
+
+# graphics
+RUN apt update \
+    && apt install --yes \
+    xserver-xorg xserver-xorg-video-intel xserver-xorg-core \
+    mesa-utils libgl1-mesa-glx libgl1-mesa-dri
+
+RUN apt update && apt install --yes python3-pip \
+    && pip3 install cpplint
 
 # cleanup
 RUN apt autoremove --yes \

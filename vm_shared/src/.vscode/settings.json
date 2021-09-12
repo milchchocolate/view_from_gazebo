@@ -1,0 +1,14 @@
+{
+    "cmake.installPrefix": "/root/plugins",
+    "C_Cpp.default.cStandard": "c17",
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.intelliSenseMode": "linux-clang-x64",
+    "C_Cpp.clang_format_path": "clang-format",
+    "C_Cpp.clang_format_sortIncludes": true,
+    "C_Cpp.clang_format_style": "Google",
+    "C_Cpp.clang_format_fallbackStyle": "Google",
+    "clang-format.fallbackStyle": "Google",
+    "clang-tidy.executable": "clang-tidy",
+    "clang-tidy.lintOnSave": true,
+    "clang-tidy.fixOnSave": false
+}
