@@ -6,10 +6,11 @@
                 "${workspaceFolder}/**",
                 "/usr/include/gazebo-11/**",
                 "/usr/include/ignition/**",
-                "/usr/include/sdformat-9.5"
+                "/usr/include/sdformat-9.6",
+                "/usr/include/opencv4/**"
             ],
             "defines": [],
-            "compilerPath": "/usr/bin/clang-12",
+            "compilerPath": "/usr/bin/clang-13",
             "cStandard": "c17",
             "cppStandard": "c++17",
             "intelliSenseMode": "linux-clang-x64",

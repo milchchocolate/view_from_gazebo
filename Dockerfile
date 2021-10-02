@@ -28,7 +28,9 @@ RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/nul
     ninja-build
 
 # clang / llvm
-RUN bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
+RUN wget https://apt.llvm.org/llvm.sh \
+    && chmod +x llvm.sh \
+    && ./llvm.sh 13
 RUN apt-get install --yes \
     clang-format \
     clang-tidy \
