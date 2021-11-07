@@ -48,6 +48,7 @@ endif()
 add_subdirectory(plugin_hw)
 add_subdirectory(move_model_hw)
 add_subdirectory(opencv_ipc)
+add_subdirectory(sensor_ipc)
 
 
 # include what you see and others:
