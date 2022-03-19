@@ -5,6 +5,8 @@
 #include <boost/interprocess/sync/named_mutex.hpp>
 #include <opencv4/opencv2/opencv.hpp>
 
+#include "../common.hpp"
+
 namespace ipc = boost::interprocess;
 
 int main()
@@ -14,10 +16,8 @@ int main()
     // test interprocess communication
     ipc::shared_memory_object shdmem{
         ipc::open_only,
-        "CameraImage",
+        GazeboIPC::NamedSharedMemName,
         ipc::read_only};
-
-    // shdmem.truncate(921600);
 
     std::cout << shdmem.get_name() << std::endl;
 
@@ -28,7 +28,7 @@ int main()
     }
 
     ipc::mapped_region region{shdmem, ipc::read_only};
-    ipc::named_mutex mutex{ipc::open_or_create, "CameraImageMutex"};
+    ipc::named_mutex mutex{ipc::open_or_create, GazeboIPC::CamereMutexName};
 
     while (true) {
         {
@@ -41,7 +41,7 @@ int main()
         cv::waitKey(40);
     }
 
-    ipc::named_mutex::remove("CameraImageMutex");
+    ipc::named_mutex::remove(GazeboIPC::CamereMutexName);
 
     return 0;
 }

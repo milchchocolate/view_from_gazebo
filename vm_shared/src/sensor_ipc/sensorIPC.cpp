@@ -1,5 +1,6 @@
 #include "gazebo/gazebo.hh"
 #include "gazebo/plugins/CameraPlugin.hh"
+#include "../common.hpp"
 
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/shared_memory_object.hpp>
@@ -18,10 +19,10 @@ namespace gazebo
     
     CameraIPC() : CameraPlugin(), 
         shdmem{ipc::open_or_create,
-            "CameraImage",
+            GazeboIPC::NamedSharedMemName,
             ipc::read_write},
-        mutex{ipc::open_or_create, "CameraImageMutex"},
-        region{this->shdmem, ipc::read_write},
+        mutex{ipc::open_or_create, GazeboIPC::CamereMutexName},
+        // region{this->shdmem, ipc::read_write},
         size{0}
     { }
 
@@ -30,6 +31,7 @@ namespace gazebo
         CameraPlugin::Load(_parent, _sdf);
         this->size = this->width * this->height * this->depth;
         shdmem.truncate(this->size);
+        region = ipc::mapped_region{this->shdmem, ipc::read_write};
     }
 
     void OnNewFrame(const unsigned char *image,
@@ -42,7 +44,7 @@ namespace gazebo
     }
 
     virtual ~CameraIPC() {
-        ipc::named_mutex::remove("CameraImageMutex");
+        ipc::named_mutex::remove(GazeboIPC::CamereMutexName);
     }
 
     ipc::shared_memory_object shdmem;
