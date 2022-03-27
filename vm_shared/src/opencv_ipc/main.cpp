@@ -1,7 +1,11 @@
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/shared_memory_object.hpp>
 #include <boost/interprocess/mapped_region.hpp>
+#include <boost/interprocess/sync/scoped_lock.hpp>
+#include <boost/interprocess/sync/named_mutex.hpp>
 #include <opencv4/opencv2/opencv.hpp>
+
+#include "../common.hpp"
 
 namespace ipc = boost::interprocess;
 
@@ -11,11 +15,9 @@ int main()
 
     // test interprocess communication
     ipc::shared_memory_object shdmem{
-        ipc::open_or_create,
-        "Boost",
-        ipc::read_write};
-
-    shdmem.truncate(1024);
+        ipc::open_only,
+        GazeboIPC::NamedSharedMemName,
+        ipc::read_only};
 
     std::cout << shdmem.get_name() << std::endl;
 
@@ -25,12 +27,21 @@ int main()
         std::cout << "size: " << size << std::endl;
     }
 
-    ipc::mapped_region region{shdmem, ipc::read_write};
+    ipc::mapped_region region{shdmem, ipc::read_only};
+    ipc::named_mutex mutex{ipc::open_or_create, GazeboIPC::CamereMutexName};
 
-    // test opencv with gui
-    cv::Mat im(480, 640, CV_8UC1, cv::Scalar(45));
-    cv::imshow("Dark", im);
-    cv::waitKey(0);
+    while (true) {
+        {
+            ipc::scoped_lock<ipc::named_mutex> lock{mutex};
+            unsigned char *mem = static_cast<unsigned char*>(region.get_address());
+            // TODO read dimension from shared memory
+            cv::Mat im{480, 640, CV_8UC3, mem};
+            cv::imshow("OpenCV IPC: CameraImage", im);
+        }
+        cv::waitKey(40);
+    }
+
+    ipc::named_mutex::remove(GazeboIPC::CamereMutexName);
 
     return 0;
 }

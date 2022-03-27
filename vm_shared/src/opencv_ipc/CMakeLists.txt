@@ -9,10 +9,13 @@ target_include_directories(cv_hw
         ${OpenCV_INCLUDE_DIRS}
 )
 
+find_package(Threads REQUIRED)
+
 target_link_libraries(cv_hw
     PRIVATE
         ${OpenCV_LIBS}
         rt
+        Threads::Threads
 )
 
 target_compile_features(cv_hw
